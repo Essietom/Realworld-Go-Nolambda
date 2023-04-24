@@ -1,10 +1,12 @@
 package service
 
 import (
+	//"realworld-go-nolambda/util"
+	"realworld-go-nolambda/util"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/chrisxue815/realworld-aws-lambda-dynamodb-go/util"
 )
 
 func GetItemByKey(tableName string, key AWSObject, out interface{}) (bool, error) {

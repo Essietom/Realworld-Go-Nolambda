@@ -2,19 +2,27 @@ package util
 
 import (
 	"encoding/json"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/chrisxue815/realworld-aws-lambda-dynamodb-go/model"
+	"log"
+	"net/http"
+
+	"realworld-go-nolambda/model"
+	//"realworld-go-nolambda/model"
 )
 
 type InputErrorResponse struct {
 	Errors model.InputError `json:"errors"`
 }
 
-func NewErrorResponse(err error) (events.APIGatewayProxyResponse, error) {
+func NewErrorResponse(statusCode int, err error, w http.ResponseWriter) {
+	EnableCors(&w)
+
 	inputError, ok := err.(model.InputError)
+
 	if !ok {
 		// Internal server error
-		return events.APIGatewayProxyResponse{}, err
+		log.Print(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("An error occured internally"))
 	}
 
 	body := InputErrorResponse{
@@ -23,21 +31,17 @@ func NewErrorResponse(err error) (events.APIGatewayProxyResponse, error) {
 
 	jsonBody, err := json.Marshal(body)
 	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("An error occured internally"))
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	w.Write(jsonBody)
 
-	response := events.APIGatewayProxyResponse{
-		StatusCode: 422,
-		Body:       string(jsonBody),
-		Headers:    CORSHeaders(),
-	}
-	return response, nil
 }
 
-func NewUnauthorizedResponse() (events.APIGatewayProxyResponse, error) {
-	response := events.APIGatewayProxyResponse{
-		StatusCode: 401,
-		Headers:    CORSHeaders(),
-	}
-	return response, nil
+func NewUnauthorizedResponse(w http.ResponseWriter) {
+	EnableCors(&w)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusUnauthorized)
 }

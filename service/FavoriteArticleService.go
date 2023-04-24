@@ -1,10 +1,12 @@
 package service
 
 import (
+	//"realworld-go-nolambda/model"
+	"realworld-go-nolambda/model"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/chrisxue815/realworld-aws-lambda-dynamodb-go/model"
 )
 
 func GetFavoriteArticleIdsByUsername(username string, offset, limit int) ([]int64, error) {

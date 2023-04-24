@@ -1,9 +1,10 @@
 package service
 
 import (
+	"sync"
+
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"sync"
 )
 
 var once sync.Once
@@ -15,6 +16,9 @@ func initializeSingletons() {
 	}))
 
 	svc = dynamodb.New(sess)
+
+	// table1 := ""
+	// table2 := ""
 }
 
 func DynamoDB() *dynamodb.DynamoDB {

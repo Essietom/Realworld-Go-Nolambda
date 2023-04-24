@@ -2,9 +2,9 @@
 
 > ### AWS Lambda + DynamoDB + Go codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
-### [Demo](https://chrisxue815.github.io/realworld/build/#/)
+### [Demo](https://Experiment-Code.github.io/realworld/build/#/)
 
-[![Build Status](https://travis-ci.org/chrisxue815/realworld-aws-lambda-dynamodb-go.svg?branch=master)](https://travis-ci.org/chrisxue815/realworld-aws-lambda-dynamodb-go)
+[![Build Status](https://travis-ci.org/Experiment-Code/realworld-aws-lambda-dynamodb-go.svg?branch=master)](https://travis-ci.org/Experiment-Code/realworld-aws-lambda-dynamodb-go)
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **AWS Lambda + DynamoDB + Go** including CRUD operations, authentication, routing, pagination, and more.
 
